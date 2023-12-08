@@ -1,9 +1,45 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Number Operations</title>
+</head>
 <body>
+  <h2>Number Operations</h2>
+  <label for="numInput">Enter a number:</label>
+  <input type="number" id="numInput">
+  <button onclick="calculate()">Calculate</button>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+  <h3>Results:</h3>
+  <p id="factorialResult"></p>
+  <p id="sumResult"></p>
+  <p id="averageResult"></p>
 
+  <script>
+    function calculate() {
+      let n = parseInt(document.getElementById('numInput').value);
+      let factorial = 1;
+      let i = 1;
+      while (i <= n) {
+        factorial *= i;
+        i++;
+      }
+      document.getElementById('factorialResult').innerText = `Factorial of ${n}: ${factorial}`;
+
+      let sum = 0;
+      let num = 1;
+      do {
+        sum += num;
+        num++;
+      } while (num <= n);
+      document.getElementById('sumResult').innerText = `Sum of first ${n} numbers: ${sum}`;
+
+      let total = 0;
+      for (let j = 1; j <= n; j++) {
+        total += j;
+      }
+      let average = total / n;
+      document.getElementById('averageResult').innerText = `Average of first ${n} numbers: ${average}`;
+    }
+  </script>
 </body>
 </html>
