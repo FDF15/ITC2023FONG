@@ -3,7 +3,7 @@
 <title>Assignment #1</title>
 <body>
 
-<h2>Temperature Converter</h2>
+<h2>Assignment #1</h2>
 <p>Type a value in the Fahrenheit field to convert the value to Celsius:</p>
 
 <p>
@@ -31,6 +31,35 @@ function temperatureConverter(valNum) {
 function temperatureConverter(valNum) {
   valNum = parseFloat(valNum);
   document.getElementById("outputFahrenheit").innerHTML=(valNum*1.8)+32;
+}
+</script>
+
+<p>Type a value in the Meters field to convert the value to Feet:</p>
+
+<p>
+  <label>Meters</label>
+  <input id="inputMeters" type="number" placeholder="Meters" oninput="LengthConverter(this.value)" onchange="LengthConverter(this.value)">
+</p>
+<p>Feet: <span id="outputFeet"></span></p>
+
+<script>
+function LengthConverter(valNum) {
+  document.getElementById("outputFeet").innerHTML=valNum*3.2808;
+}
+</script>
+
+
+<p>Type a value in the Feet field to convert the value to Meters:</p>
+
+<p>
+  <label>Feet</label>
+  <input id="inputFeet" type="number" placeholder="Feet" oninput="LengthConverter(this.value)" onchange="LengthConverter(this.value)">
+</p>
+<p>Meters: <span id="outputMeters"></span></p>
+
+<script>
+function LengthConverter(valNum) {
+  document.getElementById("outputMeters").innerHTML=valNum/3.2808;
 }
 </script>
 
