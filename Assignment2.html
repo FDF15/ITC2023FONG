@@ -2,6 +2,16 @@
 <html>
 <head>
   <title>Assignment #2</title>
+  <style>
+    /* CSS for reducing space between elements */
+    #result {
+      margin-top: 0; /* Adjust top margin of the result */
+    }
+
+    #income {
+      margin-bottom: 5px; /* Adjust bottom margin of the input field */
+    }
+  </style>
   <script>
     function calculateTax() {
       var income = parseFloat(document.getElementById('income').value);
@@ -30,8 +40,8 @@
   <p>Income Tax Calculator</p>
   <form>
     <label for="income">Enter Taxable Income:</label>
-    <input type="number" id="income" name="income" oninput="calculateTax()"><br><br>
+    <input type="number" id="income" name="income" oninput="calculateTax()" style="margin-bottom: 5px;"><br>
   </form>
-  <p id="result"></p>
+  <p id="result" style="margin-top: 0;"></p>
 </body>
 </html>
