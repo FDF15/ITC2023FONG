@@ -1,9 +1,47 @@
-<!DOCTYPE html>
-<html>
-<body>
+let payrollList = [];
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+function addEmployee(name, daysWorked, dailyRate, deductionAmount) {
+  const grossPay = daysWorked * dailyRate;
+  const netPay = grossPay - deductionAmount;
+  const lineNumber = payrollList.length + 1;
 
-</body>
-</html>
+  payrollList.push({
+    lineNumber,
+    name,
+    daysWorked,
+    dailyRate,
+    grossPay,
+    deductionAmount,
+    netPay,
+  });
+}
+
+function deleteEmployee(lineNumber) {
+  payrollList = payrollList.filter(employee => employee.lineNumber !== lineNumber);
+}
+
+function displayPayroll() {
+  console.log("Payroll List:");
+  console.log("No. | Employee Name | Days Worked | Daily Rate | Gross Pay | Deduction Amount | Net Pay");
+  console.log("-----------------------------------------------------------------------------");
+
+  payrollList.forEach(employee => {
+    console.log(`${employee.lineNumber}   | ${employee.name} | ${employee.daysWorked} | ${employee.dailyRate} | ${employee.grossPay} | ${employee.deductionAmount} | ${employee.netPay}`);
+  });
+}
+
+// Example usage:
+
+// Adding employees
+addEmployee("John", 20, 50, 100);
+addEmployee("Alice", 25, 45, 80);
+addEmployee("Bob", 22, 55, 120);
+
+// Displaying the initial payroll list
+displayPayroll();
+
+// Deleting an employee by line number (assuming the user provides the line number)
+deleteEmployee(2); // Deleting the second employee
+
+// Displaying the updated payroll list after deletion
+displayPayroll();
