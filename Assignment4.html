@@ -1,47 +1,113 @@
-let payrollList = [];
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payroll List</title>
+</head>
+<body>
+  <h1>Payroll List</h1>
 
-function addEmployee(name, daysWorked, dailyRate, deductionAmount) {
-  const grossPay = daysWorked * dailyRate;
-  const netPay = grossPay - deductionAmount;
-  const lineNumber = payrollList.length + 1;
+  <div>
+    <label for="empName">Employee Name:</label>
+    <input type="text" id="empName">
+    <label for="daysWorked">Days Worked:</label>
+    <input type="number" id="daysWorked">
+    <label for="dailyRate">Daily Rate:</label>
+    <input type="number" id="dailyRate">
+    <label for="deductionAmount">Deduction Amount:</label>
+    <input type="number" id="deductionAmount">
+    <button onclick="addEmployee()">Add Employee</button>
+  </div>
 
-  payrollList.push({
-    lineNumber,
-    name,
-    daysWorked,
-    dailyRate,
-    grossPay,
-    deductionAmount,
-    netPay,
-  });
-}
+  <table id="payrollTable">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Employee Name</th>
+        <th>Days Worked</th>
+        <th>Daily Rate</th>
+        <th>Gross Pay</th>
+        <th>Deduction Amount</th>
+        <th>Net Pay</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody id="payrollBody">
+    </tbody>
+  </table>
 
-function deleteEmployee(lineNumber) {
-  payrollList = payrollList.filter(employee => employee.lineNumber !== lineNumber);
-}
+  <div>
+    <label for="deleteLine">Delete Line Number:</label>
+    <input type="number" id="deleteLine">
+    <button onclick="deleteEmployee()">Delete Employee</button>
+  </div>
 
-function displayPayroll() {
-  console.log("Payroll List:");
-  console.log("No. | Employee Name | Days Worked | Daily Rate | Gross Pay | Deduction Amount | Net Pay");
-  console.log("-----------------------------------------------------------------------------");
+  <script>
+    let payrollList = [];
 
-  payrollList.forEach(employee => {
-    console.log(`${employee.lineNumber}   | ${employee.name} | ${employee.daysWorked} | ${employee.dailyRate} | ${employee.grossPay} | ${employee.deductionAmount} | ${employee.netPay}`);
-  });
-}
+    function addEmployee() {
+      const empName = document.getElementById('empName').value;
+      const daysWorked = parseInt(document.getElementById('daysWorked').value);
+      const dailyRate = parseFloat(document.getElementById('dailyRate').value);
+      const deductionAmount = parseFloat(document.getElementById('deductionAmount').value);
 
-// Example usage:
+      const grossPay = daysWorked * dailyRate;
+      const netPay = grossPay - deductionAmount;
 
-// Adding employees
-addEmployee("John", 20, 50, 100);
-addEmployee("Alice", 25, 45, 80);
-addEmployee("Bob", 22, 55, 120);
+      const employee = {
+        empName,
+        daysWorked,
+        dailyRate,
+        grossPay,
+        deductionAmount,
+        netPay
+      };
 
-// Displaying the initial payroll list
-displayPayroll();
+      payrollList.push(employee);
+      displayPayroll();
+    }
 
-// Deleting an employee by line number (assuming the user provides the line number)
-deleteEmployee(2); // Deleting the second employee
+    function deleteEmployee() {
+      const deleteLine = parseInt(document.getElementById('deleteLine').value);
 
-// Displaying the updated payroll list after deletion
-displayPayroll();
+      if (deleteLine > 0 && deleteLine <= payrollList.length) {
+        payrollList.splice(deleteLine - 1, 1);
+        displayPayroll();
+      } else {
+        alert('Invalid line number');
+      }
+    }
+
+    function displayPayroll() {
+      const payrollBody = document.getElementById('payrollBody');
+      payrollBody.innerHTML = '';
+
+      payrollList.forEach((employee, index) => {
+        const row = payrollBody.insertRow();
+        const numCell = row.insertCell(0);
+        const nameCell = row.insertCell(1);
+        const daysCell = row.insertCell(2);
+        const rateCell = row.insertCell(3);
+        const grossPayCell = row.insertCell(4);
+        const deductionCell = row.insertCell(5);
+        const netPayCell = row.insertCell(6);
+        const deleteCell = row.insertCell(7);
+
+        numCell.innerHTML = index + 1;
+        nameCell.innerHTML = employee.empName;
+        daysCell.innerHTML = employee.daysWorked;
+        rateCell.innerHTML = employee.dailyRate;
+        grossPayCell.innerHTML = employee.grossPay;
+        deductionCell.innerHTML = employee.deductionAmount;
+        netPayCell.innerHTML = employee.netPay;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = 'Delete';
+        deleteButton.onclick = function () {
+          deleteEmployee(index + 1);
+        };
+        deleteCell.appendChild(deleteButton);
+      });
+    }
+  </script>
+</body>
+</html>
