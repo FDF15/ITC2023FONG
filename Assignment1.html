@@ -8,12 +8,12 @@
 
 <p>
   <label>Fahrenheit</label>
-  <input id="inputFahrenheit" type="number" placeholder="Fahrenheit" oninput="temperatureConverter(this.value)" onchange="temperatureConverter(this.value)">
+  <input id="inputFahrenheit" type="number" placeholder="Fahrenheit" oninput="convertFahrenheitToCelsius(this.value)" onchange="convertFahrenheitToCelsius(this.value)">
 </p>
-<p>Celcius: <span id="outputCelcius"></span></p>
+<p>Celsius: <span id="outputCelcius"></span></p>
 
 <script>
-function temperatureConverter(valNum) {
+function convertFahrenheitToCelsius(valNum) {
   valNum = parseFloat(valNum);
   document.getElementById("outputCelcius").innerHTML=(valNum-32)/1.8;
 }
@@ -23,12 +23,12 @@ function temperatureConverter(valNum) {
 
 <p>
   <label>Celsius</label>
-  <input id="inputCelsius" type="number" placeholder="Celsius" oninput="temperatureConverter(this.value)" onchange="temperatureConverter(this.value)">
+  <input id="inputCelsius" type="number" placeholder="Celsius" oninput="convertCelsiusToFahrenheit(this.value)" onchange="convertCelsiusToFahrenheit(this.value)">
 </p>
 <p>Fahrenheit: <span id="outputFahrenheit"></span></p>
 
 <script>
-function temperatureConverter(valNum) {
+function convertCelsiusToFahrenheit(valNum) {
   valNum = parseFloat(valNum);
   document.getElementById("outputFahrenheit").innerHTML=(valNum*1.8)+32;
 }
@@ -38,12 +38,12 @@ function temperatureConverter(valNum) {
 
 <p>
   <label>Meters</label>
-  <input id="inputMeters" type="number" placeholder="Meters" oninput="LengthConverter(this.value)" onchange="LengthConverter(this.value)">
+  <input id="inputMeters" type="number" placeholder="Meters" oninput="convertMetersToFeet(this.value)" onchange="convertMetersToFeet(this.value)">
 </p>
 <p>Feet: <span id="outputFeet"></span></p>
 
 <script>
-function LengthConverter(valNum) {
+function convertMetersToFeet(valNum) {
   document.getElementById("outputFeet").innerHTML=valNum*3.2808;
 }
 </script>
@@ -52,12 +52,12 @@ function LengthConverter(valNum) {
 
 <p>
   <label>Feet</label>
-  <input id="inputFeet" type="number" placeholder="Feet" oninput="LengthConverter(this.value)" onchange="LengthConverter(this.value)">
+  <input id="inputFeet" type="number" placeholder="Feet" oninput="convertFeetToMeters(this.value)" onchange="convertFeetToMeters(this.value)">
 </p>
 <p>Meters: <span id="outputMeters"></span></p>
 
 <script>
-function LengthConverter(valNum) {
+function convertFeetToMeters(valNum) {
   document.getElementById("outputMeters").innerHTML=valNum/3.2808;
 }
 </script>
