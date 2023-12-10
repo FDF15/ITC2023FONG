@@ -42,28 +42,15 @@
     <button onclick="deleteEmployee()">Delete Employee</button>
   </div>
 
-  <dialog id="dlgConfirmCancel">
-    <form method="dialog">
-       <h4 id="dlgmsg"></h4>   
-       <button id="btnConfirm" value="confirm" >Confirm</button>
-       <button id="btnCancel" value="cancel" >Cancel</button>
-       
-    </form>
-</dialog>
-
-<dialog id="dlgAreYouSure">
+  <dialog id="dlgAreYouSure">
     <form method="dialog">
        <h4 id="dlgmsg2">Are you sure?</h4>   
        <button id="btnYes" value="yes" >Yes</button>
        <button id="btnNo" value="no" >No</button>
        
     </form>
-</dialog>
+  </dialog>
 
-
-
-
-  
   <script>
     let payrollList = [];
 
@@ -89,9 +76,25 @@
       displayPayroll();
     }
 
-    function deleteEmployee() {
-      const deleteLine = parseInt(document.getElementById('deleteLine').value);
+    function confirmDeleteDialog() {
+      const dlg = document.getElementById('dlgAreYouSure');
+      dlg.showModal();
 
+      const btnYes = document.getElementById('btnYes');
+      const btnNo = document.getElementById('btnNo');
+
+      btnYes.onclick = function() {
+        const deleteLine = parseInt(document.getElementById('deleteLine').value);
+        deleteEmployee(deleteLine);
+        dlg.close();
+      };
+
+      btnNo.onclick = function() {
+        dlg.close();
+      };
+    }
+
+    function deleteEmployee(deleteLine) {
       if (deleteLine > 0 && deleteLine <= payrollList.length) {
         payrollList.splice(deleteLine - 1, 1);
         displayPayroll();
@@ -126,14 +129,14 @@
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = 'Delete';
         deleteButton.onclick = function () {
-          deleteEmployee(index + 1);
+          confirmDeleteDialog(index + 1);
         };
         deleteCell.appendChild(deleteButton);
       });
     }
   </script>
 
-<a href="index.html" class="w3-bar-item w3-button">Back to Home</a>
+  <a href="index.html" class="w3-bar-item w3-button">Back to Home</a>
 
 </body>
 </html>
