@@ -39,17 +39,8 @@
   <div>
     <label for="deleteLine">Delete Line Number:</label>
     <input type="number" id="deleteLine">
-    <button onclick="confirmDeleteDialog()">Delete Employee</button>
+    <button onclick="deleteEmployee()">Delete Employee</button>
   </div>
-
-  <dialog id="dlgAreYouSure">
-    <form method="dialog">
-       <h4 id="dlgmsg2">Are you sure?</h4>   
-       <button id="btnYes" value="yes" >Yes</button>
-       <button id="btnNo" value="no" >No</button>
-       
-    </form>
-  </dialog>
 
   <script>
     let payrollList = [];
@@ -74,34 +65,17 @@
 
       payrollList.push(employee);
       displayPayroll();
-      clearInputFields();
     }
 
-    function confirmDeleteDialog() {
+    function deleteEmployee() {
       const deleteLine = parseInt(document.getElementById('deleteLine').value);
+
       if (deleteLine > 0 && deleteLine <= payrollList.length) {
-        const dlg = document.getElementById('dlgAreYouSure');
-        dlg.showModal();
-
-        const btnYes = document.getElementById('btnYes');
-        const btnNo = document.getElementById('btnNo');
-
-        btnYes.onclick = function() {
-          deleteEmployee(deleteLine);
-          dlg.close();
-        };
-
-        btnNo.onclick = function() {
-          dlg.close();
-        };
+        payrollList.splice(deleteLine - 1, 1);
+        displayPayroll();
       } else {
         alert('Invalid line number');
       }
-    }
-
-    function deleteEmployee(deleteLine) {
-      payrollList.splice(deleteLine - 1, 1);
-      displayPayroll();
     }
 
     function displayPayroll() {
@@ -130,21 +104,14 @@
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = 'Delete';
         deleteButton.onclick = function () {
-          confirmDeleteDialog(index + 1);
+          deleteEmployee(index + 1);
         };
         deleteCell.appendChild(deleteButton);
       });
     }
-
-    function clearInputFields() {
-      document.getElementById('empName').value = '';
-      document.getElementById('daysWorked').value = '';
-      document.getElementById('dailyRate').value = '';
-      document.getElementById('deductionAmount').value = '';
-    }
   </script>
 
-  <a href="index.html" class="w3-bar-item w3-button">Back to Home</a>
+<a href="index.html" class="w3-bar-item w3-button">Back to Home</a>
 
 </body>
 </html>
