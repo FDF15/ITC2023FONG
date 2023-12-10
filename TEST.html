@@ -55,10 +55,26 @@
     let payrollList = [];
 
     function addEmployee() {
-      // Your existing addEmployee function remains unchanged
-      // ...
+      const empName = document.getElementById('empName').value;
+      const daysWorked = parseInt(document.getElementById('daysWorked').value);
+      const dailyRate = parseFloat(document.getElementById('dailyRate').value);
+      const deductionAmount = parseFloat(document.getElementById('deductionAmount').value);
 
+      const grossPay = daysWorked * dailyRate;
+      const netPay = grossPay - deductionAmount;
+
+      const employee = {
+        empName,
+        daysWorked,
+        dailyRate,
+        grossPay,
+        deductionAmount,
+        netPay
+      };
+
+      payrollList.push(employee);
       displayPayroll();
+      clearInputFields();
     }
 
     function confirmDeleteDialog() {
@@ -118,6 +134,13 @@
         };
         deleteCell.appendChild(deleteButton);
       });
+    }
+
+    function clearInputFields() {
+      document.getElementById('empName').value = '';
+      document.getElementById('daysWorked').value = '';
+      document.getElementById('dailyRate').value = '';
+      document.getElementById('deductionAmount').value = '';
     }
   </script>
 
