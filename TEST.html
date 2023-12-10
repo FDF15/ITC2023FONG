@@ -42,6 +42,28 @@
     <button onclick="deleteEmployee()">Delete Employee</button>
   </div>
 
+  <dialog id="dlgConfirmCancel">
+    <form method="dialog">
+       <h4 id="dlgmsg"></h4>   
+       <button id="btnConfirm" value="confirm" >Confirm</button>
+       <button id="btnCancel" value="cancel" >Cancel</button>
+       
+    </form>
+</dialog>
+
+<dialog id="dlgAreYouSure">
+    <form method="dialog">
+       <h4 id="dlgmsg2">Are you sure?</h4>   
+       <button id="btnYes" value="yes" >Yes</button>
+       <button id="btnNo" value="no" >No</button>
+       
+    </form>
+</dialog>
+
+
+
+
+  
   <script>
     let payrollList = [];
 
