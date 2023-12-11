@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Assignment #4</title>
+  <title>TEST 2</title>
 </head>
 <body>
   <h2>Assignment #4</h2>
@@ -16,7 +16,7 @@
     <input type="number" id="dailyRate">
     <label for="deductionAmount">Deduction Amount:</label>
     <input type="number" id="deductionAmount">
-    <button onclick="addEmployee()">Add Employee</button>
+    <button onclick="confirmAddEmployee()">Add Employee</button>
   </div>
 
   <table id="payrollTable">
@@ -39,8 +39,24 @@
   <div>
     <label for="deleteLine">Delete Line Number:</label>
     <input type="number" id="deleteLine">
-    <button onclick="deleteEmployee()">Delete Employee</button>
+    <button onclick="confirmDeleteEmployee()">Delete Employee</button>
   </div>
+
+  <dialog id="dlgAddEmployee">
+    <form method="dialog">
+      <h4>Confirm Adding Employee?</h4>
+      <button id="btnConfirmAdd" onclick="addEmployee(); closeAddEmployeeDialog();">Confirm</button>
+      <button id="btnCancelAdd" onclick="closeAddEmployeeDialog()">Cancel</button>
+    </form>
+  </dialog>
+
+  <dialog id="dlgDeleteEmployee">
+    <form method="dialog">
+      <h4>Confirm Deleting Employee?</h4>
+      <button id="btnConfirmDelete" onclick="deleteEmployee(deleteLine.value - 1); closeDeleteEmployeeDialog();">Confirm</button>
+      <button id="btnCancelDelete" onclick="closeDeleteEmployeeDialog()">Cancel</button>
+    </form>
+  </dialog>
 
   <script>
     let payrollList = [];
@@ -67,11 +83,9 @@
       displayPayroll();
     }
 
-    function deleteEmployee() {
-      const deleteLine = parseInt(document.getElementById('deleteLine').value);
-
-      if (deleteLine > 0 && deleteLine <= payrollList.length) {
-        payrollList.splice(deleteLine - 1, 1);
+    function deleteEmployee(index) {
+      if (index >= 0 && index < payrollList.length) {
+        payrollList.splice(index, 1);
         displayPayroll();
       } else {
         alert('Invalid line number');
@@ -104,14 +118,36 @@
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = 'Delete';
         deleteButton.onclick = function () {
-          deleteEmployee(index + 1);
+          confirmDeleteEmployee(index);
         };
         deleteCell.appendChild(deleteButton);
       });
     }
+
+    function confirmAddEmployee() {
+      const dlgAddEmployee = document.getElementById('dlgAddEmployee');
+      dlgAddEmployee.showModal();
+    }
+
+    function closeAddEmployeeDialog() {
+      const dlgAddEmployee = document.getElementById('dlgAddEmployee');
+      dlgAddEmployee.close();
+    }
+
+    function confirmDeleteEmployee() {
+      const dlgDeleteEmployee = document.getElementById('dlgDeleteEmployee');
+      dlgDeleteEmployee.showModal();
+    }
+
+    function closeDeleteEmployeeDialog() {
+      const dlgDeleteEmployee = document.getElementById('dlgDeleteEmployee');
+      dlgDeleteEmployee.close();
+    }
+
+    displayPayroll(); // To display initial payroll data on page load
   </script>
 
-<a href="index.html" class="w3-bar-item w3-button">Back to Home</a>
+  <a href="index.html" class="w3-bar-item w3-button">Back to Home</a>
 
 </body>
 </html>
