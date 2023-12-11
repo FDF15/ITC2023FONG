@@ -53,7 +53,7 @@
   <dialog id="dlgDeleteEmployee">
     <form method="dialog">
       <h4>Confirm Deleting Employee?</h4>
-      <button id="btnConfirmDelete" onclick="deleteEmployee(); closeDeleteEmployeeDialog();">Confirm</button>
+      <button id="btnConfirmDelete" onclick="deleteEmployee(deleteLine.value - 1); closeDeleteEmployeeDialog();">Confirm</button>
       <button id="btnCancelDelete" onclick="closeDeleteEmployeeDialog()">Cancel</button>
     </form>
   </dialog>
@@ -134,16 +134,10 @@
       dlgAddEmployee.close();
     }
 
-    function confirmDeleteEmployee(index) {
-  const dlgDeleteEmployee = document.getElementById('dlgDeleteEmployee');
-  dlgDeleteEmployee.showModal();
-
-  document.getElementById('btnConfirmDelete').onclick = function() {
-    deleteEmployee(index);
-    closeDeleteEmployeeDialog();
-  };
-}
-
+    function confirmDeleteEmployee() {
+      const dlgDeleteEmployee = document.getElementById('dlgDeleteEmployee');
+      dlgDeleteEmployee.showModal();
+    }
 
     function closeDeleteEmployeeDialog() {
       const dlgDeleteEmployee = document.getElementById('dlgDeleteEmployee');
