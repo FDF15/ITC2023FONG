@@ -137,6 +137,7 @@
     function confirmDeleteEmployee(index) {
       const dlgDeleteEmployee = document.getElementById('dlgDeleteEmployee');
       dlgDeleteEmployee.showModal();
+
       document.getElementById('btnConfirmDelete').onclick = function() {
         deleteEmployee(index);
         closeDeleteEmployeeDialog();
