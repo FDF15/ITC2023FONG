@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Assignment #4</title>
+  <title>TEST</title>
 </head>
 <body>
   <h2>Assignment #4</h2>
@@ -33,7 +33,7 @@
   <dialog id="dlgAddEmployee">
     <form method="dialog">
       <h4>Confirm Adding Employee?</h4>
-      <button id="btnConfirmAdd" onclick="addEmployeeAndCloseDialog()">Confirm</button>
+      <button id="btnConfirmAdd" onclick="addEmployee()">Confirm</button>
       <button id="btnCancelAdd" onclick="closeAddEmployeeDialog()">Cancel</button>
     </form>
   </dialog>
@@ -42,27 +42,13 @@
   <dialog id="dlgDeleteEmployee">
     <form method="dialog">
       <h4>Confirm Deleting Employee?</h4>
-      <button id="btnConfirmDelete" onclick="deleteEmployeeAndCloseDialog()">Confirm</button>
+      <button id="btnConfirmDelete" onclick="deleteEmployee()">Confirm</button>
       <button id="btnCancelDelete" onclick="closeDeleteEmployeeDialog()">Cancel</button>
     </form>
   </dialog>
 
   <script>
-    let payrollList = [];
-
-    // Your existing functions remain the same
-
-    // Function to add an employee and close the add employee dialog modal
-    function addEmployeeAndCloseDialog() {
-      addEmployee();
-      closeAddEmployeeDialog();
-    }
-
-    // Function to delete an employee and close the delete employee dialog modal
-    function deleteEmployeeAndCloseDialog() {
-      deleteEmployee();
-      closeDeleteEmployeeDialog();
-    }
+    // Your existing JavaScript code remains the same
 
     // Function to open the add employee dialog modal
     function confirmAddEmployee() {
