@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Assignment #4</title>
+  <title>TEST</title>
 </head>
 <body>
   <h2>Assignment #4</h2>
@@ -16,102 +16,66 @@
     <input type="number" id="dailyRate">
     <label for="deductionAmount">Deduction Amount:</label>
     <input type="number" id="deductionAmount">
-    <button onclick="addEmployee()">Add Employee</button>
+    <button onclick="confirmAddEmployee()">Add Employee</button>
   </div>
 
   <table id="payrollTable">
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th>Employee Name</th>
-        <th>Days Worked</th>
-        <th>Daily Rate</th>
-        <th>Gross Pay</th>
-        <th>Deduction Amount</th>
-        <th>Net Pay</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody id="payrollBody">
-    </tbody>
+    <!-- Your table structure remains the same -->
   </table>
 
   <div>
     <label for="deleteLine">Delete Line Number:</label>
     <input type="number" id="deleteLine">
-    <button onclick="deleteEmployee()">Delete Employee</button>
+    <button onclick="confirmDeleteEmployee()">Delete Employee</button>
   </div>
 
+  <!-- Dialog modal for adding employee -->
+  <dialog id="dlgAddEmployee">
+    <form method="dialog">
+      <h4>Confirm Adding Employee?</h4>
+      <button id="btnConfirmAdd" onclick="addEmployee()">Confirm</button>
+      <button id="btnCancelAdd" onclick="closeAddEmployeeDialog()">Cancel</button>
+    </form>
+  </dialog>
+
+  <!-- Dialog modal for deleting employee -->
+  <dialog id="dlgDeleteEmployee">
+    <form method="dialog">
+      <h4>Confirm Deleting Employee?</h4>
+      <button id="btnConfirmDelete" onclick="deleteEmployee()">Confirm</button>
+      <button id="btnCancelDelete" onclick="closeDeleteEmployeeDialog()">Cancel</button>
+    </form>
+  </dialog>
+
   <script>
-    let payrollList = [];
+    // Your existing JavaScript code remains the same
 
-    function addEmployee() {
-      const empName = document.getElementById('empName').value;
-      const daysWorked = parseInt(document.getElementById('daysWorked').value);
-      const dailyRate = parseFloat(document.getElementById('dailyRate').value);
-      const deductionAmount = parseFloat(document.getElementById('deductionAmount').value);
-
-      const grossPay = daysWorked * dailyRate;
-      const netPay = grossPay - deductionAmount;
-
-      const employee = {
-        empName,
-        daysWorked,
-        dailyRate,
-        grossPay,
-        deductionAmount,
-        netPay
-      };
-
-      payrollList.push(employee);
-      displayPayroll();
+    // Function to open the add employee dialog modal
+    function confirmAddEmployee() {
+      const dlgAddEmployee = document.getElementById('dlgAddEmployee');
+      dlgAddEmployee.showModal();
     }
 
-    function deleteEmployee() {
-      const deleteLine = parseInt(document.getElementById('deleteLine').value);
-
-      if (deleteLine > 0 && deleteLine <= payrollList.length) {
-        payrollList.splice(deleteLine - 1, 1);
-        displayPayroll();
-      } else {
-        alert('Invalid line number');
-      }
+    // Function to close the add employee dialog modal
+    function closeAddEmployeeDialog() {
+      const dlgAddEmployee = document.getElementById('dlgAddEmployee');
+      dlgAddEmployee.close();
     }
 
-    function displayPayroll() {
-      const payrollBody = document.getElementById('payrollBody');
-      payrollBody.innerHTML = '';
+    // Function to open the delete employee dialog modal
+    function confirmDeleteEmployee() {
+      const dlgDeleteEmployee = document.getElementById('dlgDeleteEmployee');
+      dlgDeleteEmployee.showModal();
+    }
 
-      payrollList.forEach((employee, index) => {
-        const row = payrollBody.insertRow();
-        const numCell = row.insertCell(0);
-        const nameCell = row.insertCell(1);
-        const daysCell = row.insertCell(2);
-        const rateCell = row.insertCell(3);
-        const grossPayCell = row.insertCell(4);
-        const deductionCell = row.insertCell(5);
-        const netPayCell = row.insertCell(6);
-        const deleteCell = row.insertCell(7);
-
-        numCell.innerHTML = index + 1;
-        nameCell.innerHTML = employee.empName;
-        daysCell.innerHTML = employee.daysWorked;
-        rateCell.innerHTML = employee.dailyRate;
-        grossPayCell.innerHTML = employee.grossPay;
-        deductionCell.innerHTML = employee.deductionAmount;
-        netPayCell.innerHTML = employee.netPay;
-
-        const deleteButton = document.createElement('button');
-        deleteButton.innerHTML = 'Delete';
-        deleteButton.onclick = function () {
-          deleteEmployee(index + 1);
-        };
-        deleteCell.appendChild(deleteButton);
-      });
+    // Function to close the delete employee dialog modal
+    function closeDeleteEmployeeDialog() {
+      const dlgDeleteEmployee = document.getElementById('dlgDeleteEmployee');
+      dlgDeleteEmployee.close();
     }
   </script>
 
-<a href="index.html" class="w3-bar-item w3-button">Back to Home</a>
+  <a href="index.html" class="w3-bar-item w3-button">Back to Home</a>
 
 </body>
 </html>
